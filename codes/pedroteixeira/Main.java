@@ -1,6 +1,8 @@
 package codes.pedroteixeira;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,10 +20,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private boolean running;
+    private Caesar caesar;
+    //private Rot13 rot13;
+    private BorderPane mainPane;
 
     public Main() {
-        running = true;
+        caesar = new Caesar();
+        mainPane = new BorderPane();
     }
 
     public void start(Stage primaryStage) {
@@ -29,44 +34,31 @@ public class Main extends Application {
         menuBar.getChildren().add(new Button("File"));
         menuBar.getChildren().add(new Button("Help"));
 
-        BorderPane border = new BorderPane();
-        border.setLeft(createCipherSelector());
-        border.setTop(menuBar);
-        border.setCenter(createCaesarWorkspace());
+        mainPane.setLeft(createCipherSelector());
+        mainPane.setTop(menuBar);
+        mainPane.setCenter(caesar.getPane());
 
-        Scene scene = new Scene(border, 800, 600);
+        Scene scene = new Scene(mainPane, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("CipherSuite 0.1");
         primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    private GridPane createCaesarWorkspace() {
-        GridPane cipherWorkspace = new GridPane();
-        cipherWorkspace.add(new Label("Caesar Cipher"), 1, 1);
-        cipherWorkspace.add(new Label("Shift Value:"), 1, 2);
-        cipherWorkspace.add(new Label("Input Text:"), 1, 3);
-        TextArea plainTextArea = new TextArea();
-        cipherWorkspace.add(plainTextArea, 1, 4);
-        TextArea encryptedTextArea = new TextArea();
-        Button encryptButton = new Button("Encrypt!");
-        cipherWorkspace.add(encryptButton, 1, 5);
-        Button decryptButton = new Button("Decrypt!");
-        cipherWorkspace.add(decryptButton, 2, 5);
-        cipherWorkspace.add(encryptedTextArea, 1, 6);
-
-        return cipherWorkspace;
-    }
 
     /**
      * This method generates and returns a vertical-arranged pane of buttons to be used as a cipher selection list.
      * @return A VBox pane of cipher option buttons
      */
-    private VBox createCipherSelector() {
+    public VBox createCipherSelector() {
         VBox cipherSelectionPane = new VBox();
         cipherSelectionPane.getChildren().add(new Label("Select a Cipher:"));
-        cipherSelectionPane.getChildren().add(new Button("Caesar"));
-        cipherSelectionPane.getChildren().add(new Button("Rot13"));
+        Button caesarButton = new Button("Caesar");
+        caesarButton.setOnAction((event) -> setWorkspace(caesar.getPane()));
+        cipherSelectionPane.getChildren().add(caesarButton);
+        Button rot13Button = new Button("Rot13");
+        //rot13Button.setOnAction((event) -> setWorkspace(rot13.getPane()));
+        cipherSelectionPane.getChildren().add(rot13Button);
         cipherSelectionPane.getChildren().add(new Button("Atbash"));
         cipherSelectionPane.getChildren().add(new Button("Affine"));
         cipherSelectionPane.getChildren().add(new Button("Fractionated Morse"));
@@ -86,17 +78,11 @@ public class Main extends Application {
         return menuBar;
     }
 
+    private void setWorkspace(GridPane g) {
+        mainPane.setCenter(g);
+    }
+
     public static void main(String[] args) {
         Application.launch(args);
-    }
-
-    public void run() {
-        while (true) {
-            launchCipher();
-        }
-    }
-
-    private void launchCipher() {
-
     }
 }
