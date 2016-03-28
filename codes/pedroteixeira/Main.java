@@ -1,12 +1,9 @@
 package codes.pedroteixeira;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -54,9 +51,11 @@ public class Main extends Application {
         VBox cipherSelectionPane = new VBox();
         cipherSelectionPane.getChildren().add(new Label("Select a Cipher:"));
         Button caesarButton = new Button("Caesar");
+        caesarButton.setMaxWidth(Double.MAX_VALUE);
         caesarButton.setOnAction((event) -> setWorkspace(caesar.getPane()));
         cipherSelectionPane.getChildren().add(caesarButton);
         Button rot13Button = new Button("Rot13");
+        rot13Button.setMaxWidth(Double.MAX_VALUE);
         //rot13Button.setOnAction((event) -> setWorkspace(rot13.getPane()));
         cipherSelectionPane.getChildren().add(rot13Button);
         cipherSelectionPane.getChildren().add(new Button("Atbash"));

@@ -12,39 +12,21 @@ import javafx.scene.layout.GridPane;
  * @version 3/28/2016
  */
 
-public class Caesar {
+public class Caesar extends Cipher {
 
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-    private GridPane cipherWorkspace;
+    private PositiveIntegerField shiftField;
 
-    Caesar() {
-        cipherWorkspace = new GridPane();
-        generateScene();
+    public Caesar() {
+        super("Caesar");
+        shiftField = new PositiveIntegerField();
+        setIntegerModifierSpace("Shift:", shiftField);
+        getEncryptButton().setOnAction((event) ->
+                getEncryptedTextArea().setText(encrypt(getPlainTextArea().getText(), shiftField.getValue())));
+        getDecryptButton().setOnAction((event) ->
+                getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText(), shiftField.getValue())));
     }
 
-    private void generateScene() {
-        cipherWorkspace.add(new Label("Caesar Cipher"), 1, 1);
-        cipherWorkspace.add(new Label("Shift Value:"), 1, 2);
-        cipherWorkspace.add(new Label("Input Text:"), 1, 3);
-        TextArea plainTextArea = new TextArea();
-        PositiveIntegerField shiftField = new PositiveIntegerField();
-        cipherWorkspace.add(shiftField, 2, 2);
-        cipherWorkspace.add(plainTextArea, 1, 4);
-        TextArea encryptedTextArea = new TextArea();
-        Button encryptButton = new Button("Encrypt!");
-        encryptButton.setOnAction((event) ->
-                encryptedTextArea.setText(encrypt(plainTextArea.getText(), shiftField.getValue())));
-        cipherWorkspace.add(encryptButton, 1, 5);
-        Button decryptButton = new Button("Decrypt!");
-        decryptButton.setOnAction((event) ->
-            plainTextArea.setText(decrypt(encryptedTextArea.getText(), shiftField.getValue())));
-        cipherWorkspace.add(decryptButton, 2, 5);
-        cipherWorkspace.add(encryptedTextArea, 1, 6);
-    }
 
-    public GridPane getPane() {
-        return cipherWorkspace;
-    }
 
     /**
      * This method returns an encrypted string by shifting each character a set number of spaces to the
@@ -53,7 +35,7 @@ public class Caesar {
      * @param shift The number of letters to the right that each character should shift
      * @return A string containing the encrypted sequence
      */
-    private static String encrypt(String input, int shift) {
+    private String encrypt(String input, int shift) {
         String output = "";
         for (int i = 0; i < input.length(); i++) {
             output += ALPHABET.charAt((ALPHABET.indexOf(input.charAt(i)) + shift)%26);
