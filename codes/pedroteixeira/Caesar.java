@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 /**
  * This class implements a simple Caesar shift cipher for CipherSuite.
  * @author Pedro Teixeira
- * @version 3/27/2016
+ * @version 3/28/2016
  */
 
 public class Caesar {
@@ -27,18 +27,17 @@ public class Caesar {
         cipherWorkspace.add(new Label("Shift Value:"), 1, 2);
         cipherWorkspace.add(new Label("Input Text:"), 1, 3);
         TextArea plainTextArea = new TextArea();
-        ComboBox shiftSelector = new ComboBox();
-        for (int i = 0; i <= 26; i++) {
-            shiftSelector.getItems().add(i);
-        }
-        cipherWorkspace.add(shiftSelector, 2, 2);
+        PositiveIntegerField shiftField = new PositiveIntegerField();
+        cipherWorkspace.add(shiftField, 2, 2);
         cipherWorkspace.add(plainTextArea, 1, 4);
         TextArea encryptedTextArea = new TextArea();
         Button encryptButton = new Button("Encrypt!");
         encryptButton.setOnAction((event) ->
-                encryptedTextArea.setText(encrypt(plainTextArea.getText(), 4)));
+                encryptedTextArea.setText(encrypt(plainTextArea.getText(), shiftField.getValue())));
         cipherWorkspace.add(encryptButton, 1, 5);
         Button decryptButton = new Button("Decrypt!");
+        decryptButton.setOnAction((event) ->
+            plainTextArea.setText(decrypt(encryptedTextArea.getText(), shiftField.getValue())));
         cipherWorkspace.add(decryptButton, 2, 5);
         cipherWorkspace.add(encryptedTextArea, 1, 6);
     }
