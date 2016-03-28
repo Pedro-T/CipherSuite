@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 3/27/2016
+ * @version 3/28/2016
  */
 
 public class Main extends Application {
@@ -27,6 +27,7 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) {
+        // these are temporary for layout visualization
         HBox menuBar = new HBox();
         menuBar.getChildren().add(new Button("File"));
         menuBar.getChildren().add(new Button("Help"));
@@ -72,13 +73,12 @@ public class Main extends Application {
         return cipherSelectionPane;
     }
 
-    private HBox createMenuBar() {
-        HBox menuBar = new HBox();
-        return menuBar;
-    }
-
-    private void setWorkspace(GridPane g) {
-        mainPane.setCenter(g);
+    /**
+     * Change our view to that of the selected cipher's workspace
+     * @param pane Workspace of selected cipher
+     */
+    private void setWorkspace(GridPane pane) {
+        mainPane.setCenter(pane);
     }
 
     public static void main(String[] args) {

@@ -6,12 +6,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 
 /**
  * Implements a basic user interface for cipher operations
  *
- * Created by Pedro on 3/28/2016.
+ * @author Pedro Teixeira
+ * @version 3/28/2016
  */
 public class Cipher {
 
