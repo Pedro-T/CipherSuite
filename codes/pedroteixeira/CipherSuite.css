@@ -1,0 +1,10 @@
+.button {
+    -fx-border-color: BLACK;
+}
+
+.label {
+    -fx-alignment: CENTER;
+}
+
+.VBox {
+}

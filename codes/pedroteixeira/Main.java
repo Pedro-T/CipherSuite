@@ -1,6 +1,7 @@
 package codes.pedroteixeira;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,7 +45,6 @@ public class Main extends Application {
         mainPane.setCenter(caesarCipher.getPane());
 
         Scene scene = new Scene(mainPane, 800, 600);
-        //scene.getStylesheets().add("primary.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("CipherSuite 0.1");
         primaryStage.setResizable(false);
@@ -59,8 +59,12 @@ public class Main extends Application {
      */
     private VBox createCipherSelector() {
         VBox cipherSelectionPane = new VBox();
-        cipherSelectionPane.getChildren().add(new Label("Select a Cipher:"));
-        Button caesarButton = new Button("CaesarCipher");
+        cipherSelectionPane.setPadding(new Insets(10, 10, 10, 10));
+        cipherSelectionPane.getStylesheets().add(getClass().getResource("CipherSuite.css").toExternalForm());
+        cipherSelectionPane.getStylesheets().add("CipherSuite.css");
+        Label name = new Label("Select a Cipher");
+        name.setMaxWidth(Double.MAX_VALUE);
+        Button caesarButton = new Button("Caesar");
         caesarButton.setMaxWidth(Double.MAX_VALUE);
         caesarButton.setOnAction((event) -> setWorkspace(caesarCipher.getPane()));
         Button rot13Button = new Button("Rot13");
@@ -97,7 +101,7 @@ public class Main extends Application {
         runningKeyButton.setMaxWidth(Double.MAX_VALUE);
         //runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
 
-        cipherSelectionPane.getChildren().addAll(caesarButton, rot13Button, atbashButton,
+        cipherSelectionPane.getChildren().addAll(name, caesarButton, rot13Button, atbashButton,
                 affineButton, morseButton, vignereButton, adfgxButton, adfgvxButton,
                 railFenceButton, subButton, playFairButton, runningKeyButton);
 
