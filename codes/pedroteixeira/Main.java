@@ -17,12 +17,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Caesar caesar;
-    //private Rot13 rot13;
+    private CaesarCipher caesarCipher;
+    private Rot13Cipher rot13;
+    private AtbashCipher atbash;
+
     private BorderPane mainPane;
 
     public Main() {
-        caesar = new Caesar();
+        caesarCipher = new CaesarCipher();
+        rot13 = new Rot13Cipher();
+        atbash = new AtbashCipher();
         mainPane = new BorderPane();
     }
 
@@ -34,7 +38,7 @@ public class Main extends Application {
 
         mainPane.setLeft(createCipherSelector());
         mainPane.setTop(menuBar);
-        mainPane.setCenter(caesar.getPane());
+        mainPane.setCenter(caesarCipher.getPane());
 
         Scene scene = new Scene(mainPane, 800, 600);
         primaryStage.setScene(scene);
@@ -51,15 +55,18 @@ public class Main extends Application {
     public VBox createCipherSelector() {
         VBox cipherSelectionPane = new VBox();
         cipherSelectionPane.getChildren().add(new Label("Select a Cipher:"));
-        Button caesarButton = new Button("Caesar");
+        Button caesarButton = new Button("CaesarCipher");
         caesarButton.setMaxWidth(Double.MAX_VALUE);
-        caesarButton.setOnAction((event) -> setWorkspace(caesar.getPane()));
+        caesarButton.setOnAction((event) -> setWorkspace(caesarCipher.getPane()));
         cipherSelectionPane.getChildren().add(caesarButton);
         Button rot13Button = new Button("Rot13");
         rot13Button.setMaxWidth(Double.MAX_VALUE);
-        //rot13Button.setOnAction((event) -> setWorkspace(rot13.getPane()));
+        rot13Button.setOnAction((event) -> setWorkspace(rot13.getPane()));
         cipherSelectionPane.getChildren().add(rot13Button);
-        cipherSelectionPane.getChildren().add(new Button("Atbash"));
+        Button atbashButton = new Button("Atbash");
+        atbashButton.setMaxWidth(Double.MAX_VALUE);
+        atbashButton.setOnAction((event) -> setWorkspace(atbash.getPane()));
+        cipherSelectionPane.getChildren().add(atbashButton);
         cipherSelectionPane.getChildren().add(new Button("Affine"));
         cipherSelectionPane.getChildren().add(new Button("Fractionated Morse"));
         cipherSelectionPane.getChildren().add(new Button("Vigenere"));

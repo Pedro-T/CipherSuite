@@ -32,7 +32,6 @@ public class Cipher {
 
     private void buildPane() {
         cipherWorkspace.add(new Label(cipherName), 1, 1, 1, 1);
-        cipherWorkspace.add(new Label("Shift Value:"), 1, 2, 1, 1);
         cipherWorkspace.add(new Label("Input Text:"), 1, 4);
         cipherWorkspace.add(plainTextArea, 1, 4);
         buildActionButtons();

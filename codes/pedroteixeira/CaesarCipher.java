@@ -1,17 +1,17 @@
 package codes.pedroteixeira;
 
 /**
- * This class implements a simple Caesar shift cipher for CipherSuite.
+ * This class implements a simple CaesarCipher shift cipher for CipherSuite.
  * @author Pedro Teixeira
  * @version 3/28/2016
  */
 
-public class Caesar extends Cipher {
+public class CaesarCipher extends Cipher {
 
     private PositiveIntegerField shiftField;
 
-    public Caesar() {
-        super("Caesar");
+    public CaesarCipher() {
+        super("CaesarCipher");
         shiftField = new PositiveIntegerField();
         setIntegerModifierSpace("Shift:", shiftField);
         getEncryptButton().setOnAction((event) ->
@@ -29,7 +29,7 @@ public class Caesar extends Cipher {
      * @param shift The number of letters to the right that each character should shift
      * @return A string containing the encrypted sequence
      */
-    private String encrypt(String input, int shift) {
+    private static String encrypt(String input, int shift) {
         String output = "";
         for (int i = 0; i < input.length(); i++) {
             output += ALPHABET.charAt((ALPHABET.indexOf(input.charAt(i)) + shift)%26);
