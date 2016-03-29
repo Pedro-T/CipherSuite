@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 3/28/2016
+ * @version 3/29/2016
  */
 
 public class Main extends Application {
@@ -20,6 +20,7 @@ public class Main extends Application {
     private CaesarCipher caesarCipher;
     private Rot13Cipher rot13;
     private AtbashCipher atbash;
+    private AffineCipher affine;
 
     private BorderPane mainPane;
 
@@ -27,6 +28,8 @@ public class Main extends Application {
         caesarCipher = new CaesarCipher();
         rot13 = new Rot13Cipher();
         atbash = new AtbashCipher();
+        affine = new AffineCipher();
+
         mainPane = new BorderPane();
     }
 
@@ -41,6 +44,7 @@ public class Main extends Application {
         mainPane.setCenter(caesarCipher.getPane());
 
         Scene scene = new Scene(mainPane, 800, 600);
+        //scene.getStylesheets().add("primary.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("CipherSuite 0.1");
         primaryStage.setResizable(false);
@@ -49,33 +53,53 @@ public class Main extends Application {
 
 
     /**
-     * This method generates and returns a vertical-arranged pane of buttons to be used as a cipher selection list.
+     * This method generates and returns a vertical-arranged pane of buttons to be used as a
+     * cipher selection list.
      * @return A VBox pane of cipher option buttons
      */
-    public VBox createCipherSelector() {
+    private VBox createCipherSelector() {
         VBox cipherSelectionPane = new VBox();
         cipherSelectionPane.getChildren().add(new Label("Select a Cipher:"));
         Button caesarButton = new Button("CaesarCipher");
         caesarButton.setMaxWidth(Double.MAX_VALUE);
         caesarButton.setOnAction((event) -> setWorkspace(caesarCipher.getPane()));
-        cipherSelectionPane.getChildren().add(caesarButton);
         Button rot13Button = new Button("Rot13");
         rot13Button.setMaxWidth(Double.MAX_VALUE);
         rot13Button.setOnAction((event) -> setWorkspace(rot13.getPane()));
-        cipherSelectionPane.getChildren().add(rot13Button);
         Button atbashButton = new Button("Atbash");
         atbashButton.setMaxWidth(Double.MAX_VALUE);
         atbashButton.setOnAction((event) -> setWorkspace(atbash.getPane()));
-        cipherSelectionPane.getChildren().add(atbashButton);
-        cipherSelectionPane.getChildren().add(new Button("Affine"));
-        cipherSelectionPane.getChildren().add(new Button("Fractionated Morse"));
-        cipherSelectionPane.getChildren().add(new Button("Vigenere"));
-        cipherSelectionPane.getChildren().add(new Button("ADFGX"));
-        cipherSelectionPane.getChildren().add(new Button("ADFGVX"));
-        cipherSelectionPane.getChildren().add(new Button("Rail-Fence"));
-        cipherSelectionPane.getChildren().add(new Button("Substitution"));
-        cipherSelectionPane.getChildren().add(new Button("Playfair"));
-        cipherSelectionPane.getChildren().add(new Button("Running Key"));
+        Button affineButton = new Button("Affine");
+        affineButton.setMaxWidth(Double.MAX_VALUE);
+        affineButton.setOnAction((event) -> setWorkspace(affine.getPane()));
+        Button morseButton = new Button("Fractionated Morse");
+        morseButton.setMaxWidth(Double.MAX_VALUE);
+        //morseButton.setOnAction((event) -> setWorkspace(morse.getPane()));
+        Button vignereButton = new Button("Vignere");
+        vignereButton.setMaxWidth(Double.MAX_VALUE);
+        //vignereButton.setOnAction((event) -> setWorkspace(vignere.getPane()));
+        Button adfgxButton = new Button("ADFGX");
+        adfgxButton.setMaxWidth(Double.MAX_VALUE);
+        //adfgxButton.setOnAction((event) -> setWorkspace(adfgx.getPane()));
+        Button adfgvxButton = new Button("ADFGVX");
+        adfgvxButton.setMaxWidth(Double.MAX_VALUE);
+        //adfgvxButton.setOnAction((event) -> setWorkspace(adfgvx.getPane()));
+        Button railFenceButton = new Button("Rail-Fence");
+        railFenceButton.setMaxWidth(Double.MAX_VALUE);
+        //railFenceButton.setOnAction((event) -> setWorkspace(railFence.getPane()));
+        Button subButton = new Button("Substitution");
+        subButton.setMaxWidth(Double.MAX_VALUE);
+        //subButton.setOnAction((event) -> setWorkspace(substitution.getPane()));
+        Button playFairButton = new Button("Playfair");
+        playFairButton.setMaxWidth(Double.MAX_VALUE);
+        //playFairButton.setOnAction((event) -> setWorkspace(playFair.getPane()));
+        Button runningKeyButton = new Button("Running Key");
+        runningKeyButton.setMaxWidth(Double.MAX_VALUE);
+        //runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
+
+        cipherSelectionPane.getChildren().addAll(caesarButton, rot13Button, atbashButton,
+                affineButton, morseButton, vignereButton, adfgxButton, adfgvxButton,
+                railFenceButton, subButton, playFairButton, runningKeyButton);
 
         return cipherSelectionPane;
     }
