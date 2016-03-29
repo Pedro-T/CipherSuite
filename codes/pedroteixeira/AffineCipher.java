@@ -44,7 +44,6 @@ public class AffineCipher extends Cipher{
     private int getInverse(int x) {
         for (int i = 1; i <= 26; i++) {
             if (((x * i)%26) == 1) {
-                System.out.println(i);
                 return i;
             }
         }
