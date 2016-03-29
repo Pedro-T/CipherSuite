@@ -8,7 +8,7 @@ package codes.pedroteixeira;
 
 public class Rot13Cipher extends Cipher {
 
-    private PositiveIntegerField shiftField;
+    private KeyField shiftField;
 
     public Rot13Cipher() {
         super("Rot13");

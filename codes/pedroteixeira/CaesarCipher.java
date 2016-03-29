@@ -8,19 +8,14 @@ package codes.pedroteixeira;
 
 public class CaesarCipher extends Cipher {
 
-    private PositiveIntegerField shiftField;
-
     public CaesarCipher() {
         super("CaesarCipher");
-        shiftField = new PositiveIntegerField();
-        setIntegerModifierSpace("Shift:", shiftField);
+        setKeyField("Shift:", KeyField.InputType.INTEGER_SINGLE);
         getEncryptButton().setOnAction((event) ->
-                getEncryptedTextArea().setText(encrypt(getPlainTextArea().getText(), shiftField.getValue())));
+                getEncryptedTextArea().setText(encrypt(getPlainTextArea().getText(), getKeyField().getIntegerValue())));
         getDecryptButton().setOnAction((event) ->
-                getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText(), shiftField.getValue())));
+                getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText(), getKeyField().getIntegerValue())));
     }
-
-
 
     /**
      * This method returns an encrypted string by shifting each character a set number of spaces to the

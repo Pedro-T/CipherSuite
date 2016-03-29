@@ -24,6 +24,7 @@ public class Cipher {
     private TextArea plainTextArea = new TextArea();
     private TextArea encryptedTextArea = new TextArea();
     private HBox actionButtonBar;
+    private KeyField keyField;
 
     public Cipher(String name) {
         cipherName = name;
@@ -62,10 +63,11 @@ public class Cipher {
     /**
      * Adds an integer-only field to the cipher workspace
      * @param labelText Text for the field description
-     * @param field a PositiveIntegerField to add
+     * @param type the type of KeyField to use
      */
-    public void setIntegerModifierSpace(String labelText, PositiveIntegerField field) {
-        modifierBar.getChildren().addAll(new Label(labelText), field);
+    public void setKeyField(String labelText, KeyField.InputType type) {
+        keyField = new KeyField(type);
+        modifierBar.getChildren().addAll(new Label(labelText), keyField);
         cipherWorkspace.add(modifierBar, 1, 3);
     }
 
@@ -88,6 +90,8 @@ public class Cipher {
     public TextArea getEncryptedTextArea() {
         return encryptedTextArea;
     }
+
+    public KeyField getKeyField() { return keyField; }
 
 
 }
