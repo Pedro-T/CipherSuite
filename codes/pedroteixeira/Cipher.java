@@ -30,6 +30,15 @@ public class Cipher {
         buildPane();
     }
 
+    /**
+     * Removes all non number or letter characters
+     * @param text Text to be modified
+     * @return Modified string without characters
+     */
+    public static String cleanText(String text) {
+        return text.replaceAll("[^\\w]", "").replaceAll("[\\s]", "").toLowerCase();
+    }
+
     private void buildPane() {
         cipherWorkspace.add(new Label(cipherName), 1, 1, 1, 1);
         cipherWorkspace.add(new Label("Input Text:"), 1, 4);

@@ -31,8 +31,9 @@ public class CaesarCipher extends Cipher {
      */
     private static String encrypt(String input, int shift) {
         String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            output += ALPHABET.charAt((ALPHABET.indexOf(input.charAt(i)) + shift)%26);
+        String text = cleanText(input);
+        for (int i = 0; i < text.length(); i++) {
+            output += ALPHABET.charAt((ALPHABET.indexOf(text.charAt(i)) + shift)%26);
         }
         return output;
     }
@@ -46,8 +47,9 @@ public class CaesarCipher extends Cipher {
      */
     private static String decrypt(String input, int shift) {
         String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            int charIndex = ALPHABET.indexOf(Character.toLowerCase(input.charAt(i)));
+        String text = cleanText(input);
+        for (int i = 0; i < text.length(); i++) {
+            int charIndex = ALPHABET.indexOf(text.charAt(i));
             int outChar = (charIndex - shift)%ALPHABET.length();
             if (outChar < 0) {
                 outChar += ALPHABET.length();
