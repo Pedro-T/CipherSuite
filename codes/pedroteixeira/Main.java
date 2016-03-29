@@ -61,7 +61,6 @@ public class Main extends Application {
         VBox cipherSelectionPane = new VBox();
         cipherSelectionPane.setPadding(new Insets(10, 10, 10, 10));
         cipherSelectionPane.getStylesheets().add(getClass().getResource("CipherSuite.css").toExternalForm());
-        cipherSelectionPane.getStylesheets().add("CipherSuite.css");
         Label name = new Label("Select a Cipher");
         name.setMaxWidth(Double.MAX_VALUE);
         Button caesarButton = new Button("Caesar");
