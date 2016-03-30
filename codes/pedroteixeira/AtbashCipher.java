@@ -17,18 +17,20 @@ public class AtbashCipher extends Cipher {
     }
 
     private static String encrypt(String input) {
-        String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            output += REVERSE_ALPHABET.charAt(ALPHABET.indexOf(input.charAt(i)));
+        String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            sb.append(REVERSE_ALPHABET.charAt(ALPHABET.indexOf(text.charAt(i))));
         }
-        return output;
+        return sb.toString();
     }
 
     private static String decrypt(String input) {
-        String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            output += ALPHABET.charAt(REVERSE_ALPHABET.indexOf(input.charAt(i)));
+        String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            sb.append(ALPHABET.charAt(REVERSE_ALPHABET.indexOf(text.charAt(i))));
         }
-        return output;
+        return sb.toString();
     }
 }

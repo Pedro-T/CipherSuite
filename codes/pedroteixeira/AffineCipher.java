@@ -16,17 +16,17 @@ public class AffineCipher extends Cipher{
     }
 
     public String encrypt(String input, KeyPair pair) {
-        String output = "";
         String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
         for (int i = 0; i < text.length(); i++) {
-            output += ALPHABET.charAt((pair.a() * ALPHABET.indexOf(text.charAt(i)) + pair.b())%26);
+            sb.append(ALPHABET.charAt((pair.a() * ALPHABET.indexOf(text.charAt(i)) + pair.b())%26));
         }
-        return output;
+        return sb.toString();
     }
 
     public String decrypt(String input, KeyPair pair) {
-        String output = "";
         String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
         if (getInverse(pair.a()) == -1) {
             return "Error: No inverse exists for " + pair.a() + ", invalid key.";
         }
@@ -35,10 +35,10 @@ public class AffineCipher extends Cipher{
             for (int i = 0; i < text.length(); i++) {
                 int x = (getInverse(pair.a()) * (ALPHABET.indexOf(text.charAt(i)) - pair.b())%26);
                 if (x < 0) {x += 26;}
-                output += ALPHABET.charAt(x);
+                sb.append(ALPHABET.charAt(x));
             }
         }
-        return output;
+        return sb.toString();
     }
 
     private int getInverse(int x) {

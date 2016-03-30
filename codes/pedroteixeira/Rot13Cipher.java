@@ -25,11 +25,12 @@ public class Rot13Cipher extends Cipher {
      * @return A string containing the encrypted sequence
      */
     private static String encrypt(String input) {
-        String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            output += ALPHABET.charAt((ALPHABET.indexOf(input.charAt(i)) + 13)%26);
+        String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            sb.append(ALPHABET.charAt((ALPHABET.indexOf(text.charAt(i)) + 13)%26));
         }
-        return output;
+        return sb.toString();
     }
 
     /**
@@ -39,16 +40,17 @@ public class Rot13Cipher extends Cipher {
      * @return A string containing the encrypted sequence
      */
     private static String decrypt(String input) {
-        String output = "";
-        for (int i = 0; i < input.length(); i++) {
-            int charIndex = ALPHABET.indexOf(Character.toLowerCase(input.charAt(i)));
+        String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            int charIndex = ALPHABET.indexOf(Character.toLowerCase(text.charAt(i)));
             int outChar = (charIndex - 13)%ALPHABET.length();
             if (outChar < 0) {
                 outChar += ALPHABET.length();
             }
 
-            output += ALPHABET.charAt(outChar);
+            sb.append(ALPHABET.charAt(outChar));
         }
-        return output;
+        return sb.toString();
     }
 }

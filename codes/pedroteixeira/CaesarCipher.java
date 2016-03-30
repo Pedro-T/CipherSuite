@@ -25,12 +25,12 @@ public class CaesarCipher extends Cipher {
      * @return A string containing the encrypted sequence
      */
     private static String encrypt(String input, int shift) {
-        String output = "";
         String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
         for (int i = 0; i < text.length(); i++) {
-            output += ALPHABET.charAt((ALPHABET.indexOf(text.charAt(i)) + shift)%26);
+            sb.append(ALPHABET.charAt((ALPHABET.indexOf(text.charAt(i)) + shift)%26));
         }
-        return output;
+        return sb.toString();
     }
 
     /**
@@ -41,17 +41,16 @@ public class CaesarCipher extends Cipher {
      * @return A string containing the encrypted sequence
      */
     private static String decrypt(String input, int shift) {
-        String output = "";
         String text = cleanText(input);
+        StringBuilder sb = new StringBuilder(text.length());
         for (int i = 0; i < text.length(); i++) {
             int charIndex = ALPHABET.indexOf(text.charAt(i));
             int outChar = (charIndex - shift)%ALPHABET.length();
             if (outChar < 0) {
                 outChar += ALPHABET.length();
             }
-
-            output += ALPHABET.charAt(outChar);
+            sb.append(ALPHABET.charAt(outChar));
         }
-        return output;
+        return sb.toString();
     }
 }
