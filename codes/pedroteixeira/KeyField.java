@@ -23,7 +23,7 @@ public class KeyField extends TextField {
     }
 
     /**
-     * Test replacement text to ensure that only numbers are entered into this text field.
+     * Test replacement text to ensure that only allowed values are entered.
      *
      * @param start start of range to replace
      * @param end   end of range to replace
@@ -44,6 +44,29 @@ public class KeyField extends TextField {
                 break;
             case TEXT:
                 super.replaceText(start, end, text); // we should refuse special characters? maybe?
+                break;
+        }
+    }
+
+    /**
+     * Test replacement text to ensure that only allowed values are entered.
+     * @param text text to replace selected text with
+     */
+    @Override
+    public void replaceSelection(String text) {
+        switch (type) {
+            case INTEGER_PAIR:
+                if (text.matches("[0-9,]")) { // this needs work to force int, then comma, then int
+                    super.replaceSelection(text);
+                }
+                break;
+            case INTEGER_SINGLE:
+                if (isInteger(text)) {
+                    super.replaceSelection(text);
+                }
+                break;
+            case TEXT:
+                super.replaceSelection(text); // we should refuse special characters? maybe?
                 break;
         }
     }
