@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 3/29/2016
+ * @version 4/6/2016
  */
 
 public class Main extends Application {
@@ -22,6 +22,7 @@ public class Main extends Application {
     private Rot13Cipher rot13;
     private AtbashCipher atbash;
     private AffineCipher affine;
+    private MorseCipher morse;
 
     private BorderPane mainPane;
 
@@ -30,6 +31,7 @@ public class Main extends Application {
         rot13 = new Rot13Cipher();
         atbash = new AtbashCipher();
         affine = new AffineCipher();
+        morse = new MorseCipher();
 
         mainPane = new BorderPane();
     }
@@ -77,7 +79,7 @@ public class Main extends Application {
         affineButton.setOnAction((event) -> setWorkspace(affine.getPane()));
         Button morseButton = new Button("Fractionated Morse");
         morseButton.setMaxWidth(Double.MAX_VALUE);
-        //morseButton.setOnAction((event) -> setWorkspace(morse.getPane()));
+        morseButton.setOnAction((event) -> setWorkspace(morse.getPane()));
         Button vignereButton = new Button("Vignere");
         vignereButton.setMaxWidth(Double.MAX_VALUE);
         //vignereButton.setOnAction((event) -> setWorkspace(vignere.getPane()));

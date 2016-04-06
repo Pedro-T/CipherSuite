@@ -5,7 +5,8 @@ import javafx.scene.control.TextField;
 /**
  * Text field modified to accept only integers
  *
- * Created by Pedro on 3/28/2016.
+ * @author Pedro Teixeira
+ * @version 4/6/2016
  */
 public class KeyField extends TextField {
 
