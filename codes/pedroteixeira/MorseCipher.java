@@ -23,7 +23,7 @@ public class MorseCipher extends Cipher {
         getEncryptButton().setOnAction((event) ->
                 getEncryptedTextArea().setText(encrypt(getPlainTextArea().getText(), getKeyField().getText())));
         getDecryptButton().setOnAction((event) ->
-                getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText())));
+                getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText(), getKeyField().getText())));
     }
 
     private String encrypt(String input, String key) {
@@ -31,15 +31,18 @@ public class MorseCipher extends Cipher {
         String morse = convertToMorse(input);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < morse.length() - 2; i += 3) {
-            System.out.println(morse.substring(i, i+3));
-            System.out.println(conversionMap.get(morse.substring(i, i+3)));
             sb.append(conversionMap.get(morse.substring(i, i+3)));
         }
         return sb.toString();
     }
 
-    private String decrypt(String input) {
-        return convertFromMorse(input);
+    private String decrypt(String input, String key) {
+        HashMap conversionMap = reverseMap(getKeyConvertMap(getKeyAlphabet(key)));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            sb.append(conversionMap.get(input.charAt(i)));
+        }
+        return convertFromMorse(sb.toString());
     }
 
     private static String convertToMorse(String text) {
@@ -50,11 +53,12 @@ public class MorseCipher extends Cipher {
                 sb.append("x");
             }
             else {
-                sb.append(ALPHABET_TO_MORSE.get(c));
-                sb.append("x");
+                if(ALPHABET_TO_MORSE.get(c) != null) {
+                    sb.append(ALPHABET_TO_MORSE.get(c));
+                    sb.append("x");
+                }
             }
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 
