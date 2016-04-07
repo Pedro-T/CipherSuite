@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 4/6/2016
+ * @version 4/7/2016
  */
 
 public class Main extends Application {
@@ -23,6 +23,7 @@ public class Main extends Application {
     private AtbashCipher atbash;
     private AffineCipher affine;
     private MorseCipher morse;
+    private VignereCipher vignere;
 
     private BorderPane mainPane;
 
@@ -32,6 +33,7 @@ public class Main extends Application {
         atbash = new AtbashCipher();
         affine = new AffineCipher();
         morse = new MorseCipher();
+        vignere = new VignereCipher();
 
         mainPane = new BorderPane();
     }
@@ -52,7 +54,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
 
     /**
      * This method generates and returns a vertical-arranged pane of buttons to be used as a
@@ -82,7 +83,7 @@ public class Main extends Application {
         morseButton.setOnAction((event) -> setWorkspace(morse.getPane()));
         Button vignereButton = new Button("Vignere");
         vignereButton.setMaxWidth(Double.MAX_VALUE);
-        //vignereButton.setOnAction((event) -> setWorkspace(vignere.getPane()));
+        vignereButton.setOnAction((event) -> setWorkspace(vignere.getPane()));
         Button adfgxButton = new Button("ADFGX");
         adfgxButton.setMaxWidth(Double.MAX_VALUE);
         //adfgxButton.setOnAction((event) -> setWorkspace(adfgx.getPane()));
