@@ -4,14 +4,18 @@ import java.util.HashMap;
 
 /**
  * @author Pedro Teixeira
- * @version 4/6/2016
+ * @version 4/7/2016
  */
 public class MorseCipher extends Cipher {
 
-    private static final HashMap ALPHABET_TO_MORSE = getMorseMap();
-    private static final HashMap MORSE_TO_ALPHABET = reverseMap(ALPHABET_TO_MORSE);
-    private static String mixedAlphabet = "";
-    private static HashMap conversionMap;
+    private static final HashMap ALPHABET_TO_MORSE;
+    private static final HashMap MORSE_TO_ALPHABET;
+
+    static {
+        ALPHABET_TO_MORSE = getMorseMap();
+        MORSE_TO_ALPHABET = reverseMap(ALPHABET_TO_MORSE);
+    }
+
 
     public MorseCipher() {
         super("Fractionated Morse Cipher");
@@ -22,32 +26,35 @@ public class MorseCipher extends Cipher {
                 getPlainTextArea().setText(decrypt(getEncryptedTextArea().getText())));
     }
 
-    private static String encrypt(String input, String key) {
-        setKey(key);
-        String morse = convertToMorse(cleanText(input));
+    private String encrypt(String input, String key) {
+        HashMap conversionMap = getKeyConvertMap(getKeyAlphabet(key));
+        String morse = convertToMorse(input);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < morse.length() - 2; i += 3) {
-            // right now this just converts to morse itself. need to pass it through key word table
+            System.out.println(morse.substring(i, i+3));
+            System.out.println(conversionMap.get(morse.substring(i, i+3)));
+            sb.append(conversionMap.get(morse.substring(i, i+3)));
         }
-        return convertToMorse(input);
+        return sb.toString();
     }
 
-    private static String decrypt(String input) {
+    private String decrypt(String input) {
         return convertFromMorse(input);
     }
 
     private static String convertToMorse(String text) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
-            switch(text.charAt(i)) {
-                case ' ':
-                    sb.append("xx");
-                    break;
-                default:
-                    sb.append(ALPHABET_TO_MORSE.get(text.charAt(i)));
-                    sb.append("x");
+            char c = text.charAt(i);
+            if (c == ' ') {
+                sb.append("x");
+            }
+            else {
+                sb.append(ALPHABET_TO_MORSE.get(c));
+                sb.append("x");
             }
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 
@@ -66,12 +73,17 @@ public class MorseCipher extends Cipher {
         return sb.toString();
     }
 
-    private static void setKey(String key) {
+    private static String getKeyAlphabet(String key) {
         StringBuilder sb = new StringBuilder();
         sb.append(key);
-        sb.append(ALPHABET.replaceAll(key, ""));
+        for (char c : ALPHABET.toCharArray()) {
+            if (key.indexOf(c) == -1) {
+                sb.append(c);
+            }
+        }
+
         System.out.println(sb.toString());  // DEBUG ONLY, DELETE THIS
-        mixedAlphabet = sb.toString();
+        return sb.toString();
     }
 
     private static HashMap getMorseMap() {
@@ -100,6 +112,19 @@ public class MorseCipher extends Cipher {
         HashMap map = new HashMap();
         for (Object o : h.keySet()) {
             map.put(h.get(o), o);
+        }
+        return map;
+    }
+
+    private HashMap getKeyConvertMap(String key) {
+        HashMap map = new HashMap();
+        String[] conversionTable = {
+                "...", "..-", "..x", ".-.", ".--", ".-x", ".x.", ".x-", ".xx", "-..", "-.-",
+                "-.x", "--.", "---", "--x", "-x.", "-x-", "-xx", "x..", "x.-", "x.x", "x-.",
+                "x--", "x-x", "xx.", "xx-"
+        };
+        for (int i = 0; i < conversionTable.length; i++) {
+            map.put(conversionTable[i], key.charAt(i));
         }
         return map;
     }
