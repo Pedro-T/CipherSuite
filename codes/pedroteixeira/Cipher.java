@@ -40,6 +40,9 @@ public class Cipher {
         return text.replaceAll("[^\\w]", "").replaceAll("[\\s]", "").toLowerCase();
     }
 
+    /**
+     * Applies common controls to pane
+     */
     private void buildPane() {
         cipherWorkspace.add(new Label(cipherName), 1, 1, 1, 1);
         cipherWorkspace.add(new Label("Input Text:"), 1, 4);
@@ -49,6 +52,9 @@ public class Cipher {
         cipherWorkspace.add(encryptedTextArea, 1, 7);
     }
 
+    /**
+     * Creates and applies encrypt and decrypt button area
+     */
     private void buildActionButtons() {
         encryptButton = new Button("Encrypt!");
         decryptButton = new Button("Decrypt!");
