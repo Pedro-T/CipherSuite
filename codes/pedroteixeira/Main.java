@@ -25,6 +25,7 @@ public class Main extends Application {
     private MorseCipher morse;
     private VignereCipher vignere;
     private AdfgxCipher adfgx;
+    private SubstitutionCipher substitution;
 
     private BorderPane mainPane;
 
@@ -36,6 +37,7 @@ public class Main extends Application {
         morse = new MorseCipher();
         vignere = new VignereCipher();
         adfgx = new AdfgxCipher();
+        substitution = new SubstitutionCipher();
 
         mainPane = new BorderPane();
     }
@@ -91,7 +93,7 @@ public class Main extends Application {
         adfgxButton.setOnAction((event) -> setWorkspace(adfgx.getPane()));
         Button subButton = new Button("Substitution");
         subButton.setMaxWidth(Double.MAX_VALUE);
-        //subButton.setOnAction((event) -> setWorkspace(substitution.getPane()));
+        subButton.setOnAction((event) -> setWorkspace(substitution.getPane()));
         Button runningKeyButton = new Button("Running Key");
         runningKeyButton.setMaxWidth(Double.MAX_VALUE);
         //runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
