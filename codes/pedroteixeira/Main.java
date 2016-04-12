@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 4/7/2016
+ * @version 4/12/2016
  */
 
 public class Main extends Application {
@@ -24,6 +24,7 @@ public class Main extends Application {
     private AffineCipher affine;
     private MorseCipher morse;
     private VignereCipher vignere;
+    private AdfgxCipher adfgx;
 
     private BorderPane mainPane;
 
@@ -34,6 +35,7 @@ public class Main extends Application {
         affine = new AffineCipher();
         morse = new MorseCipher();
         vignere = new VignereCipher();
+        adfgx = new AdfgxCipher();
 
         mainPane = new BorderPane();
     }
@@ -86,26 +88,16 @@ public class Main extends Application {
         vignereButton.setOnAction((event) -> setWorkspace(vignere.getPane()));
         Button adfgxButton = new Button("ADFGX");
         adfgxButton.setMaxWidth(Double.MAX_VALUE);
-        //adfgxButton.setOnAction((event) -> setWorkspace(adfgx.getPane()));
-        Button adfgvxButton = new Button("ADFGVX");
-        adfgvxButton.setMaxWidth(Double.MAX_VALUE);
-        //adfgvxButton.setOnAction((event) -> setWorkspace(adfgvx.getPane()));
-        Button railFenceButton = new Button("Rail-Fence");
-        railFenceButton.setMaxWidth(Double.MAX_VALUE);
-        //railFenceButton.setOnAction((event) -> setWorkspace(railFence.getPane()));
+        adfgxButton.setOnAction((event) -> setWorkspace(adfgx.getPane()));
         Button subButton = new Button("Substitution");
         subButton.setMaxWidth(Double.MAX_VALUE);
         //subButton.setOnAction((event) -> setWorkspace(substitution.getPane()));
-        Button playFairButton = new Button("Playfair");
-        playFairButton.setMaxWidth(Double.MAX_VALUE);
-        //playFairButton.setOnAction((event) -> setWorkspace(playFair.getPane()));
         Button runningKeyButton = new Button("Running Key");
         runningKeyButton.setMaxWidth(Double.MAX_VALUE);
         //runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
 
         cipherSelectionPane.getChildren().addAll(name, caesarButton, rot13Button, atbashButton,
-                affineButton, morseButton, vignereButton, adfgxButton, adfgvxButton,
-                railFenceButton, subButton, playFairButton, runningKeyButton);
+                affineButton, morseButton, vignereButton, adfgxButton, subButton, runningKeyButton);
 
         return cipherSelectionPane;
     }

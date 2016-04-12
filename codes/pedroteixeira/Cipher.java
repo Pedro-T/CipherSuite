@@ -11,11 +11,11 @@ import javafx.scene.layout.Priority;
  * Implements a basic user interface for cipher operations
  *
  * @author Pedro Teixeira
- * @version 3/28/2016
+ * @version 4/12/2016
  */
 public class Cipher {
 
-    public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
     private HBox modifierBar = new HBox();
     private Button decryptButton;
     private Button encryptButton;
@@ -23,10 +23,11 @@ public class Cipher {
     private String cipherName;
     private TextArea plainTextArea = new TextArea();
     private TextArea encryptedTextArea = new TextArea();
+    private Label userMessage = new Label();
     private HBox actionButtonBar;
     private KeyField keyField;
 
-    public Cipher(String name) {
+    Cipher(String name) {
         cipherName = name;
         buildPane();
     }
@@ -36,7 +37,7 @@ public class Cipher {
      * @param text Text to be modified
      * @return Modified string without characters
      */
-    public static String cleanText(String text) {
+    static String cleanText(String text) {
         return text.replaceAll("[^\\w]", "").replaceAll("[\\s]", "").toLowerCase();
     }
 
@@ -49,7 +50,8 @@ public class Cipher {
         cipherWorkspace.add(plainTextArea, 1, 4);
         buildActionButtons();
         cipherWorkspace.add(actionButtonBar, 1, 5);
-        cipherWorkspace.add(encryptedTextArea, 1, 7);
+        cipherWorkspace.add(encryptedTextArea, 1, 6);
+        cipherWorkspace.add(userMessage, 1, 7);
     }
 
     /**
@@ -71,33 +73,35 @@ public class Cipher {
      * @param labelText Text for the field description
      * @param type the type of KeyField to use
      */
-    public void setKeyField(String labelText, KeyField.InputType type) {
+    void setKeyField(String labelText, KeyField.InputType type) {
         keyField = new KeyField(type);
         modifierBar.getChildren().addAll(new Label(labelText), keyField);
         cipherWorkspace.add(modifierBar, 1, 3);
     }
 
-    public GridPane getPane() {
+    Label getUserMessage() {return userMessage;}
+
+    GridPane getPane() {
         return cipherWorkspace;
     }
 
-    public Button getEncryptButton() {
+    Button getEncryptButton() {
         return encryptButton;
     }
 
-    public Button getDecryptButton() {
+    Button getDecryptButton() {
         return decryptButton;
     }
 
-    public TextArea getPlainTextArea() {
+    TextArea getPlainTextArea() {
         return plainTextArea;
     }
 
-    public TextArea getEncryptedTextArea() {
+    TextArea getEncryptedTextArea() {
         return encryptedTextArea;
     }
 
-    public KeyField getKeyField() { return keyField; }
+    KeyField getKeyField() { return keyField; }
 
 
 }
