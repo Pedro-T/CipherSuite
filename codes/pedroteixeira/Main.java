@@ -54,7 +54,7 @@ public class Main extends Application {
         mainPane.setTop(menuBar);
         mainPane.setCenter(caesarCipher.getPane());
 
-        Scene scene = new Scene(mainPane, 800, 600);
+        Scene scene = new Scene(mainPane, 625, 500);
         primaryStage.setScene(scene);
         primaryStage.setTitle("CipherSuite 0.8");
         primaryStage.setResizable(false);
