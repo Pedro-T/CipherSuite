@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * that implement the various ciphers.
  *
  * @author Pedro Teixeira
- * @version 4/12/2016
+ * @version 4/14/2016
  */
 
 public class Main extends Application {
@@ -26,6 +26,7 @@ public class Main extends Application {
     private VignereCipher vignere;
     private AdfgxCipher adfgx;
     private SubstitutionCipher substitution;
+    private RunningKeyCipher runningKey;
 
     private BorderPane mainPane;
 
@@ -38,6 +39,7 @@ public class Main extends Application {
         vignere = new VignereCipher();
         adfgx = new AdfgxCipher();
         substitution = new SubstitutionCipher();
+        runningKey = new RunningKeyCipher();
 
         mainPane = new BorderPane();
     }
@@ -54,7 +56,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(mainPane, 800, 600);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("CipherSuite 0.1");
+        primaryStage.setTitle("CipherSuite 0.8");
         primaryStage.setResizable(false);
         primaryStage.show();
     }
@@ -96,7 +98,7 @@ public class Main extends Application {
         subButton.setOnAction((event) -> setWorkspace(substitution.getPane()));
         Button runningKeyButton = new Button("Running Key");
         runningKeyButton.setMaxWidth(Double.MAX_VALUE);
-        //runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
+        runningKeyButton.setOnAction((event) -> setWorkspace(runningKey.getPane()));
 
         cipherSelectionPane.getChildren().addAll(name, caesarButton, rot13Button, atbashButton,
                 affineButton, morseButton, vignereButton, adfgxButton, subButton, runningKeyButton);
